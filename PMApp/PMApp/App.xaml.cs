@@ -1,17 +1,19 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace PMApp
 {
+    using View;
+
     public partial class App : Application
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new Login();
+            MainPage = new SolicitudesPages();
         }
 
         protected override void OnStart()

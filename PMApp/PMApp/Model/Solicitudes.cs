@@ -27,5 +27,6 @@
         [JsonIgnore]
         public virtual Sucursales Sucursales { get; set; }
 
+
     }
 }
