@@ -1,6 +1,7 @@
 ﻿namespace PMApp.Services
 {
     using Newtonsoft.Json;
+    using Plugin.Connectivity;
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
@@ -8,6 +9,33 @@
 
     public class ApiServices
     {
+        public async Task<Response> CheckConnection()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                return new Response
+                {
+                    IsSucess = false,
+                    Message = "Por favor encienda el acceso a internet",
+                };
+            }
+
+            var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
+            if (!isReachable)
+            {
+                return new Response
+                {
+                    IsSucess = false,
+                    Message = "No hay salida a internet",
+                };
+            }
+
+            return new Response
+            {
+                IsSucess = true,
+            };
+        }
+
         public async Task<Response> GetList<T>(string urlBase, string prefix, string controller)
         {
             try

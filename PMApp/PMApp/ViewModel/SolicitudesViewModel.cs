@@ -34,8 +34,16 @@
         private async void LoadSolicitudes()
         {
             this.IsRefreshing = true;
-            //var urlAPI = Application.Current.Resources["urlAPI"].ToString();
-            var response = await this.apiService.GetList<Solicitudes>("https://packagemail.azurewebsites.net", "/api", "/solicitudesapi");
+
+            var connection = await apiService.CheckConnection();
+            if (!connection.IsSucess)
+            {
+                this.IsRefreshing = false;
+                await Application.Current.MainPage.DisplayAlert("Error", connection.Message, "OK");
+                return;
+            }
+            var urlAPI = Application.Current.Resources["urlAPI"].ToString();
+            var response = await this.apiService.GetList<Solicitudes>(urlAPI, "/api", "/solicitudesapi");
             if (!response.IsSucess)
             {
                 this.IsRefreshing = false;
