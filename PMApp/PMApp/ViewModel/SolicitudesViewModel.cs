@@ -3,10 +3,13 @@
     using GalaSoft.MvvmLight.Command;
     using Models;
     using PMApp.Services;
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IO;
     using System.Windows.Input;
     using Xamarin.Forms;
+    using ViewModel;
 
     public class SolicitudesViewModel : BaseViewModel
     {
@@ -31,6 +34,13 @@
             this.LoadSolicitudes();
         }
 
+        //private Image convertedImage;
+        //public Image ConvertedImage
+        //{
+        //    get { return convertedImage; }
+        //    set { convertedImage = value; }
+        //}
+
         private async void LoadSolicitudes()
         {
             this.IsRefreshing = true;
@@ -53,8 +63,21 @@
 
             var list = (List<Solicitudes>)response.Result;
             this.Solicitudes = new ObservableCollection<Solicitudes>(list);
+
+            //foreach (var item in Solicitudes)
+            //{
+            //    ConvertedImage.Source = new Image(Base64StringToImageSource(item.Imagen64b));
+                
+            //}
+
             this.IsRefreshing = false;
         }
+        //public ImageSource Base64StringToImageSource(string source)
+        //{
+        //    var byteArray = Convert.FromBase64String(source);
+        //    Stream stream = new MemoryStream(byteArray);
+        //    return ImageSource.FromStream(() => stream) ;
+        //}
 
         public ICommand RefreshCommand
         {

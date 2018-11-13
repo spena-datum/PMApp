@@ -163,4 +163,7 @@
       <Name>PMApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_add_circle.png" />
+  </ItemGroup>
 </Project>

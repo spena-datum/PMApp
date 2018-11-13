@@ -4,6 +4,10 @@
              x:Class="PMApp.View.SolicitudesPages"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Solicitudes">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Icon="ic_action_add_circle.png"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Solicitudes}"
@@ -13,7 +17,8 @@
                 HasUnevenRows="True"    
                 IsRefreshing="{Binding IsRefreshing}"
                 RefreshCommand="{Binding RefreshCommand}"
-                IsPullToRefreshEnabled="True">
+                IsPullToRefreshEnabled="True"
+                >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -23,12 +28,12 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label
+                                <Image
                                     Grid.Column="0"
-                                    Text="{Binding Fecha, StringFormat='\{0:dd/MM/yyyy}'}"/>
+                                    x:Name="ConvertedImage"/>
                                 <Label
                                     Grid.Column="1"
-                                    Text="{Binding Usuario}"/>
+                                    Text="{Binding SucursalId}"/>
                                 <Label
                                     Grid.Column="2"
                                     Text="{Binding DescripcionPaquete}"/>

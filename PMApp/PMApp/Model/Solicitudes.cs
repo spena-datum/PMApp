@@ -3,7 +3,7 @@
     using Newtonsoft.Json;
     using System;
     using System.ComponentModel;
-
+    using static System.Net.Mime.MediaTypeNames;
 
     public class Solicitudes
     {
@@ -17,7 +17,7 @@
 
         public int EstadoId { get; set; }
 
-        public string Imagen64b { get; set; }
+        public string Imagen64b { get; set; } 
 
         public int SucursalId { get; set; }
 
