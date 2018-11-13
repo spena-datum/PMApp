@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PMApp.View.AddSolicitudesPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Nueva Solicitud">
+    <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding AddSolicitudes}">
+            <StackLayout
+                Padding="5"
+                BackgroundColor="LightYellow">
+                <Label
+                    Text="Descripción del paquete"
+                    TextColor="Gray"/>
+                <Entry
+                    Placeholder="Descripción"
+                    PlaceholderColor="LightGray"/>
+                <Label
+                    Text="Sucursal Destino"
+                    TextColor="Gray"/>
+                <Picker
+                    Title="Seleccione una sucursal"
+                    TextColor="LightGray"/>
+                <Label
+                    Text="Imagen del paquete"
+                    TextColor="Gray"/>
+                <Image
+                    VerticalOptions="FillAndExpand"
+                    Source="noimage.jpg"
+                    WidthRequest="150"
+                    HeightRequest="100"/>
+                <Label
+                    Text="Toque la imagen para cambiarla"
+                    FontSize="Small"
+                    HorizontalOptions="Center"
+                    TextColor="Gray"/>
+                <ActivityIndicator
+                    IsRunning="False"
+                    VerticalOptions="CenterAndExpand"/>
+                <Button
+                    Text="Guardar"
+                    BorderRadius="23"
+                    HeightRequest="46"
+                    BackgroundColor="DarkSlateGray"
+                    TextColor="White"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

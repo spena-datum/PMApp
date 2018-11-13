@@ -6,19 +6,20 @@
              Title="Solicitudes">
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Icon="ic_action_add_circle.png"/>
+            Icon="ic_action_add_circle.png"
+            Command="{Binding AddSolicitudesCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Solicitudes}"
-            Margin="5">
+            Margin="5"
+            BackgroundColor="LightYellow">
             <ListView
                 ItemsSource="{Binding Solicitudes}"
                 HasUnevenRows="True"    
                 IsRefreshing="{Binding IsRefreshing}"
                 RefreshCommand="{Binding RefreshCommand}"
-                IsPullToRefreshEnabled="True"
-                >
+                IsPullToRefreshEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

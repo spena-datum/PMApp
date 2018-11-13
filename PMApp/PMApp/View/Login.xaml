@@ -48,7 +48,10 @@
                     BackgroundColor="LightYellow"
                     IsPassword="True"/>
                 <Button
-                    Text="Acceder"/>
+                    Text="Acceder"
+                    BackgroundColor="DarkSlateGray"
+                    BorderRadius="23"
+                    HeightRequest="46"/>
             </StackLayout>
            
         </StackLayout>
