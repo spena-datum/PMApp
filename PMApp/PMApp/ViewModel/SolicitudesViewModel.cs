@@ -13,9 +13,15 @@
 
     public class SolicitudesViewModel : BaseViewModel
     {
+        #region Attributes
         private ApiServices apiService;
-        private ObservableCollection<Solicitudes> solicitudes;
+        
         private bool isRefreshing;
+        #endregion
+
+        #region Properties
+        private ObservableCollection<Solicitudes> solicitudes;
+
         public ObservableCollection<Solicitudes> Solicitudes
         {
             get { return this.solicitudes; }
@@ -28,19 +34,41 @@
             set { this.SetValue(ref this.isRefreshing, value); }
         }
 
-        public SolicitudesViewModel()
-        {
-            this.apiService = new ApiServices();
-            this.LoadSolicitudes();
-        }
-
         //private Image convertedImage;
         //public Image ConvertedImage
         //{
         //    get { return convertedImage; }
         //    set { convertedImage = value; }
         //}
+        #endregion
 
+        #region Constructors
+        public SolicitudesViewModel()
+        {
+            instances = this;
+            this.apiService = new ApiServices();
+            this.LoadSolicitudes();
+        }
+
+        #endregion
+
+        #region Singleton
+
+        private static SolicitudesViewModel instances;
+
+        public static SolicitudesViewModel GetInstance()
+        {
+            if (instances == null)
+            {
+                return new SolicitudesViewModel();
+            }
+
+            return instances;
+        }
+
+        #endregion
+
+        #region Methods
         private async void LoadSolicitudes()
         {
             this.IsRefreshing = true;
@@ -69,18 +97,23 @@
             //foreach (var item in Solicitudes)
             //{
             //    ConvertedImage.Source = new Image(Base64StringToImageSource(item.Imagen64b));
-                
+
             //}
 
             this.IsRefreshing = false;
+
+
         }
+
         //public ImageSource Base64StringToImageSource(string source)
         //{
         //    var byteArray = Convert.FromBase64String(source);
         //    Stream stream = new MemoryStream(byteArray);
         //    return ImageSource.FromStream(() => stream) ;
         //}
+        #endregion
 
+        #region Commands
         public ICommand RefreshCommand
         {
             get
@@ -88,5 +121,11 @@
                 return new RelayCommand(LoadSolicitudes);
             }
         }
+        #endregion
+
+
+
+
+
     }
 }

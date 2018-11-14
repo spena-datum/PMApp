@@ -64,19 +64,19 @@ namespace PMApp.ViewModel
                 return;
             }
 
-            this.isRunning = true;
-            this.isEnabled = false;
+            this.IsRunning = true;
+            this.IsEnabled = false;
 
             var connection = await apiService.CheckConnection();
             if (!connection.IsSucess)
             {
-                this.isRunning = false;
-                this.isEnabled = true;
+                this.IsRunning = false;
+                this.IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert("Error", connection.Message, "OK");
                 return;
             }
 
-            var solicitudes = new Solicitudes
+            var solicitud = new Solicitudes
             {
                 Fecha = DateTime.Now.ToUniversalTime().AddHours(-6),
                 Usuario = "aleboy16@gmail.com",
@@ -87,17 +87,22 @@ namespace PMApp.ViewModel
             var urlAPI = Application.Current.Resources["UrlAPI"].ToString();
             var prefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlSolicitudesController"].ToString();
-            var response = await this.apiService.Post(urlAPI, prefix, controller, solicitudes);
+            var response = await this.apiService.Post(urlAPI, prefix, controller, solicitud);
 
             if (!response.IsSucess)
             {
-                this.isRunning = false;
-                this.isEnabled = true;
+                this.IsRunning = false;
+                this.IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert("Error", response.Message, "OK");
                 return;
             }
-            this.isRunning = false;
-            this.isEnabled = true;
+
+            var newSolicitud = (Solicitudes)response.Result; //Obtenemos el resultado
+            var viewModel = SolicitudesViewModel.GetInstance(); //Obtenemos la clase del viewModel
+            viewModel.Solicitudes.Add(newSolicitud); //Agregamos a la instancia que ya se encuentra en memoria a la página.
+
+            this.IsRunning = false;
+            this.IsEnabled = true;
             await Application.Current.MainPage.Navigation.PopAsync();
         }
         #endregion
