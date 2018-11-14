@@ -11,11 +11,12 @@
                 Padding="5"
                 BackgroundColor="LightYellow">
                 <Label
-                    Text="Descripción del paquete"
+                    Text="Descripcion del paquete"
                     TextColor="Gray"/>
                 <Entry
                     Placeholder="Descripción"
-                    PlaceholderColor="LightGray"/>
+                    PlaceholderColor="LightGray"
+                    Text="{Binding Description}"/>
                 <Label
                     Text="Sucursal Destino"
                     TextColor="Gray"/>
@@ -36,14 +37,16 @@
                     HorizontalOptions="Center"
                     TextColor="Gray"/>
                 <ActivityIndicator
-                    IsRunning="False"
+                    IsRunning="{Binding IsRunning}"
                     VerticalOptions="CenterAndExpand"/>
                 <Button
                     Text="Guardar"
                     BorderRadius="23"
                     HeightRequest="46"
                     BackgroundColor="DarkSlateGray"
-                    TextColor="White"/>
+                    TextColor="White"
+                    IsEnabled="{Binding IsEnabled}"
+                    Command="{Binding SaveCommand}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

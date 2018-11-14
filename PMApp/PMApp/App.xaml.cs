@@ -13,10 +13,7 @@ namespace PMApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new SolicitudesPages())
-            {
-                BackgroundColor = Color.FromHex("#2F4F4F"), BarTextColor = Color.White
-            };
+            MainPage = new NavigationPage(new SolicitudesPages());
         }
 
         protected override void OnStart()
