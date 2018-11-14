@@ -28,9 +28,13 @@
                     TextColor="Gray"/>
                 <Image
                     VerticalOptions="FillAndExpand"
-                    Source="noimage.jpg"
+                    Source="{Binding ImageSource}"
                     WidthRequest="150"
-                    HeightRequest="100"/>
+                    HeightRequest="100">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Label
                     Text="Toque la imagen para cambiarla"
                     FontSize="Small"

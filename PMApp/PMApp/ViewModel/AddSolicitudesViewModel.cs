@@ -2,6 +2,8 @@
 namespace PMApp.ViewModel
 {
     using GalaSoft.MvvmLight.Command;
+    using Plugin.Media;
+    using Plugin.Media.Abstractions;
     using PMApp.Models;
     using PMApp.Services;
     using System;
@@ -14,6 +16,8 @@ namespace PMApp.ViewModel
         private bool isRunning;
         private bool isEnabled;
         private ApiServices apiService;
+        private ImageSource imageSource;
+        private MediaFile file; //en este atributo va a quedar la foto del usuario
         #endregion
 
 
@@ -32,7 +36,11 @@ namespace PMApp.ViewModel
             set { this.SetValue(ref this.isEnabled, value); }
         }
 
-
+        public ImageSource ImageSource
+        {
+            get { return this.imageSource; }
+            set { this.SetValue(ref this.imageSource, value); }
+        }
         #endregion
 
 
@@ -42,12 +50,65 @@ namespace PMApp.ViewModel
         {
             this.IsEnabled = true;
             this.apiService = new ApiServices();
+            this.ImageSource = "noimage.jpg";
         }
 
         #endregion
 
 
         #region Commands
+
+        public ICommand ChangeImageCommand
+        {
+            get
+            {
+                return new RelayCommand(ChangeImage);
+            }
+        }
+
+        private async void ChangeImage()
+        {
+            await CrossMedia.Current.Initialize(); //Inicializar la libreria de fotos
+
+            var source = await Application.Current.MainPage.DisplayActionSheet(
+                "De donde quieres tomar la imagen?",
+                "Cancelar",
+                null,
+                "De la galería",
+                "Nueva imagen");
+
+            if (source == "Cancelar")
+            {
+                this.file = null;
+                return;
+            }
+
+            if (source == "Nueva imagen")
+            {
+                this.file = await CrossMedia.Current.TakePhotoAsync(
+                    new StoreCameraMediaOptions
+                    {
+                        Directory = "Sample",
+                        Name = "test.jpg",
+                        PhotoSize = PhotoSize.Small,
+                    }
+                );
+            }
+            else
+            {
+                this.file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (this.file != null)
+            {
+                this.ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = this.file.GetStream();
+                    return stream;
+                });
+            }
+        }
+
         public ICommand SaveCommand
         {
             get
