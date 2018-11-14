@@ -52,8 +52,10 @@
                 await Application.Current.MainPage.DisplayAlert("Error", connection.Message, "OK");
                 return;
             }
-            var urlAPI = Application.Current.Resources["urlAPI"].ToString();
-            var response = await this.apiService.GetList<Solicitudes>(urlAPI, "/api", "/solicitudesapi");
+            var urlAPI = Application.Current.Resources["UrlAPI"].ToString();
+            var prefix = Application.Current.Resources["UrlPrefix"].ToString();
+            var controller = Application.Current.Resources["UrlSolicitudesController"].ToString();
+            var response = await this.apiService.GetList<Solicitudes>(urlAPI, prefix, controller);
             if (!response.IsSucess)
             {
                 this.IsRefreshing = false;

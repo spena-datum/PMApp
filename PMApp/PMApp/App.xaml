@@ -9,8 +9,14 @@
     <!--Locator-->
             <infra:InstanceLocator x:Key="Locator"/>
     <!--Parameters-->
-            <x:String x:Key="urlAPI">
+            <x:String x:Key="UrlAPI">
                 https://packagemail.azurewebsites.net
+            </x:String>
+            <x:String x:Key="UrlPrefix">
+                /api
+            </x:String>
+            <x:String x:Key="UrlSolicitudesController">
+                /solicitudesapi
             </x:String>
         </ResourceDictionary>
     </Application.Resources>
