@@ -4,6 +4,7 @@ namespace PMApp.ViewModel
     using GalaSoft.MvvmLight.Command;
     using Plugin.Media;
     using Plugin.Media.Abstractions;
+    using PMApp.Helper;
     using PMApp.Models;
     using PMApp.Services;
     using System;
@@ -71,7 +72,7 @@ namespace PMApp.ViewModel
             await CrossMedia.Current.Initialize(); //Inicializar la libreria de fotos
 
             var source = await Application.Current.MainPage.DisplayActionSheet(
-                "De donde quieres tomar la imagen?",
+                "¿De donde quieres tomar la imagen?",
                 "Cancelar",
                 null,
                 "De la galería",
@@ -137,13 +138,21 @@ namespace PMApp.ViewModel
                 return;
             }
 
+            string image64 = null;
+            if (this.file != null)
+            {
+                image64 = FilesHelper.ReadFully(this.file.GetStream());
+            }
+
+
             var solicitud = new Solicitudes
             {
                 Fecha = DateTime.Now.ToUniversalTime().AddHours(-6),
                 Usuario = "aleboy16@gmail.com",
                 EstadoId = 1,
                 DescripcionPaquete = Description,
-                SucursalId = 2
+                SucursalId = 2,
+                Imagen64b = image64
             };
             var urlAPI = Application.Current.Resources["UrlAPI"].ToString();
             var prefix = Application.Current.Resources["UrlPrefix"].ToString();
