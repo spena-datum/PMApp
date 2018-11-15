@@ -5,7 +5,7 @@
 
     public class FilesHelper
     {
-        public static string ReadFully(Stream input)
+        public static string StreamToBase64(Stream input)
         {
             using (MemoryStream ms = new MemoryStream())
             {

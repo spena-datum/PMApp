@@ -141,7 +141,7 @@ namespace PMApp.ViewModel
             string image64 = null;
             if (this.file != null)
             {
-                image64 = FilesHelper.ReadFully(this.file.GetStream());
+                image64 = FilesHelper.StreamToBase64(this.file.GetStream());
             }
 
 
