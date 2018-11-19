@@ -17,7 +17,9 @@
 
         public int EstadoId { get; set; }
 
-        public string Imagen64b { get; set; } 
+        public string Imagen64b { get; set; }
+
+        //public Image Picture { get; set; }
 
         public int SucursalId { get; set; }
 
