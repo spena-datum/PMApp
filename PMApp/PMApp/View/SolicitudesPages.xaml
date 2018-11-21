@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PMApp.Helper"
              x:Class="PMApp.View.SolicitudesPages"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Solicitudes">
@@ -9,6 +10,11 @@
             Icon="ic_action_add_circle.png"
             Command="{Binding AddSolicitudesCommand}"/>
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ConverterBase64ImageSource x:Key="Base64ToImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout
                 BindingContext="{Binding Solicitudes}"
@@ -31,7 +37,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Image
                                         Grid.Column="0"
-                                        x:Name="ConvertedImage"/>
+                                    Source="{Binding Imagen64b, Converter={StaticResource Base64ToImageConverter}}"/>
                                 <Label
                                         Grid.Column="1"
                                         Text="{Binding SucursalId}"/>
@@ -42,7 +48,6 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
             </ListView>
         </StackLayout>
     </ContentPage.Content>

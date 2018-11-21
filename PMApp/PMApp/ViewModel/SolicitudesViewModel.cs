@@ -6,10 +6,11 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Globalization;
     using System.IO;
     using System.Windows.Input;
     using Xamarin.Forms;
-    using ViewModel;
+
 
     public class SolicitudesViewModel : BaseViewModel
     {
@@ -94,23 +95,32 @@
             var list = (List<Solicitudes>)response.Result;
             this.Solicitudes = new ObservableCollection<Solicitudes>(list);
 
-            //foreach (var item in Solicitudes)
-            //{
-            //    ConvertedImage.Source = new Image(Base64StringToImageSource(item.Imagen64b));
-
-            //}
 
             this.IsRefreshing = false;
 
 
         }
 
-        //public ImageSource Base64StringToImageSource(string source)
-        //{
-        //    var byteArray = Convert.FromBase64String(source);
-        //    Stream stream = new MemoryStream(byteArray);
-        //    return ImageSource.FromStream(() => stream) ;
-        //}
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string base64Image = (string)value;
+
+            if (base64Image == null)
+                return null;
+
+            // Convert base64Image from string to byte-array
+            var imageBytes = System.Convert.FromBase64String(base64Image);
+
+            // Return a new ImageSource
+            return ImageSource.FromStream(() => { return new MemoryStream(imageBytes); });
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            // Not implemented as we do not convert back
+            throw new NotSupportedException();
+        }
+
         #endregion
 
         #region Commands
