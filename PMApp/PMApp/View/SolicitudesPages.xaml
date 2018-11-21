@@ -20,6 +20,25 @@
                 BindingContext="{Binding Solicitudes}"
                 Margin="5"
                 BackgroundColor="LightYellow">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Text="Paquete"
+                    FontAttributes="Bold"/>
+                <Label
+                    Grid.Column="1"
+                    Text="Sucursal"
+                    FontAttributes="Bold"/>
+                <Label
+                    Grid.Column="2"
+                    Text="Descripcion"
+                    FontAttributes="Bold"/>
+            </Grid>
             <ListView
                     ItemsSource="{Binding Solicitudes}"
                     HasUnevenRows="True"    
@@ -37,13 +56,17 @@
                                 </Grid.ColumnDefinitions>
                                 <Image
                                         Grid.Column="0"
-                                    Source="{Binding Imagen64b, Converter={StaticResource Base64ToImageConverter}}"/>
+                                    Source="{Binding Imagen64b, Converter={StaticResource Base64ToImageConverter}}"
+                                    WidthRequest="50"
+                                    HeightRequest="50"/>
                                 <Label
-                                        Grid.Column="1"
-                                        Text="{Binding SucursalId}"/>
+                                    Grid.Column="1"
+                                    Text="{Binding SucursalId}"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
                                 <Label
-                                        Grid.Column="2"
-                                        Text="{Binding DescripcionPaquete}"/>
+                                    Grid.Column="2"
+                                    Text="{Binding DescripcionPaquete}"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
