@@ -13,7 +13,7 @@ namespace PMApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new SolicitudesPages());
+            MainPage = new NavigationPage(new MapPage());
         }
 
         protected override void OnStart()

@@ -25,6 +25,7 @@ namespace PMApp.Droid
             base.OnCreate(savedInstanceState);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);//Inicializando el plugin para tomar foto
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            global::Xamarin.FormsMaps.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
 
