@@ -52,6 +52,8 @@
                     BackgroundColor="DarkSlateGray"
                     BorderRadius="23"
                     HeightRequest="46"/>
+                <ActivityIndicator
+                    Scale="25"/>
             </StackLayout>
            
         </StackLayout>

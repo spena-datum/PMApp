@@ -35,12 +35,6 @@
             set { this.SetValue(ref this.isRefreshing, value); }
         }
 
-        //private Image convertedImage;
-        //public Image ConvertedImage
-        //{
-        //    get { return convertedImage; }
-        //    set { convertedImage = value; }
-        //}
         #endregion
 
         #region Constructors
