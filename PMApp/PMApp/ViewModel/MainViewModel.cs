@@ -28,6 +28,7 @@ namespace PMApp.ViewModel
         {
             this.AddSolicitudes = new AddSolicitudesViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new AddSolicitudesPage());
+            
         }
     }
 }
